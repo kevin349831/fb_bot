@@ -18,7 +18,7 @@ function myReply($message){
 
 
 //此處的quick_replies 是對話視窗下會出現的快速鍵
-// type 有 text,location
+// type 有 text,location,image
 function reply($sender,$message_to_reply){
     if($message_to_reply=="我要搭高雄捷運"){
         $jsonData = '{
@@ -26,7 +26,49 @@ function reply($sender,$message_to_reply){
                 "id":"'.$sender.'"
             },
             "message":{
-                "text":"'.$message_to_reply.'",
+                "attachment":{
+                  "type":"image",
+                  "payload":{
+                    "url":"https://fbbot-haoyushi.c9users.io/pic/guide_routemap.png"
+                  }
+                }
+            }
+        }';
+    }else if($message_to_reply=="我要搭台北捷運"){
+        $jsonData = '{
+            "recipient":{
+                "id":"'.$sender.'"
+            },
+            "message":{
+                "attachment":{
+                  "type":"image",
+                  "payload":{
+                    "url":"https://fbbot-haoyushi.c9users.io/pic/routemap2017.jpg"
+                  }
+                },
+                "quick_replies":[
+                  {
+                    "content_type":"text",
+                    "title":"HI",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"你是誰",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+                  },
+                  {
+                    "content_type":"text",
+                    "title":"我要搭高雄捷運",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+                  },{
+                    "content_type":"text",
+                    "title":"我要搭台北捷運",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+                  },{
+                    "content_type":"location",
+                  }
+                ]
             }
         }';
     }else{
@@ -50,6 +92,10 @@ function reply($sender,$message_to_reply){
                   {
                     "content_type":"text",
                     "title":"我要搭高雄捷運",
+                    "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+                  },{
+                    "content_type":"text",
+                    "title":"我要搭台北捷運",
                     "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
                   },{
                     "content_type":"location",
