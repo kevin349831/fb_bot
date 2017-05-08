@@ -1,9 +1,13 @@
 <?php
+
+require_once "reply.php";
+
 //My access token
 $access_token = "your access token";
 //my verify token
 $verify_token = "your verify token";
 $hub_verify_token = null;
+
 
 if(isset($_REQUEST['hub_challenge'])) {
     $challenge = $_REQUEST['hub_challenge'];
@@ -25,18 +29,7 @@ $message_to_reply = '';
 /**
  * ㄑ我要回復什麼
  */
-if($message=="指令"){
-    $message_to_reply = "你可以跟我打招呼或是問我是誰";
-}else if(($message=="hi")||($message=="妳好")||($message=="你好")){
-    $hi = array("HI~", "你好。", "哈囉！"); 
-    $num = rand(0,2);
-    $message_to_reply = $hi[$num]."最近好嗎？".$num;
-}else if($message=="你是誰"){
-    $message_to_reply = "我是Yu-Bot，我還在學習中。";
-}else{
-    //重複使用者說的話
-    $message_to_reply = $message;
-}
+$message_to_reply = myReply($message);
  
 
 //API Url
@@ -44,14 +37,9 @@ $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$access_token
 //Initiate cURL.
 $ch = curl_init($url);
 //The JSON data.
-$jsonData = '{
-    "recipient":{
-        "id":"'.$sender.'"
-    },
-    "message":{
-        "text":"'.$message_to_reply.'"
-    }
-}';
+$jsonData = reply($sender,$message_to_reply);
+
+
 //Encode the array into JSON.
 $jsonDataEncoded = $jsonData;
 //Tell cURL that we want to send a POST request.
