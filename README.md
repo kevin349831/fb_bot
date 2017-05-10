@@ -1,5 +1,5 @@
 # fb_bot
 
-使用PHP寫Facebook_Bot
+Write Facebook_Bot with PHP.
 
-將access_token & verify_token 填入自己的就可以了
+Fill in your access_token and verify_token.
