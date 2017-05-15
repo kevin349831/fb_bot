@@ -1,4 +1,4 @@
-# fb_bot
+# FaceBook_bot
 
 Write Facebook_Bot with PHP.
 
